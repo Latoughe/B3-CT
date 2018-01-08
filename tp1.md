@@ -53,11 +53,11 @@ Quelques rappels dans cette optique :
     * c'est aussi le runtime utilisé par docker
 * installer `runc` (juste un paquet) et installer docker (suivez [la doc officielle](https://docs.docker.com/engine/installation/linux/docker-ce/centos/), **c'est pas dans vos dépôts**)
 * démarrez le service systemd `docker`
-* `docker info | grep runtime`
+* `docker info | grep -i runtime`
 
 * créer un fs alpine Linux + les metadatas standardisées (standard ACI de l'initiative OCI). Pour ce faire : 
     * `mkdir -p <WORK_DIR>/rootfs`
-    * se déplacer dans le répertoire
+    * se déplacer dans le répertoire `<WORKDIR>`
     * créer un fs alpine `docker export $(docker create alpine) | tar -C rootfs -xvf -`
     * générer les metadatas `runc spec` (un fichier json a pop dans le répertoire courant)
     * `runc run <NAME>` et vous avez votre container
