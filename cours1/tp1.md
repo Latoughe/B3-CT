@@ -201,11 +201,12 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
     * vous pouvez les installer en utilisant `pip install -r requirements` : 
 
 * créer un `docker-compose.yml` qui contient :
+    * un réseau dans lequel toutes vos machines sont
     * un conteneur Redis (stockage clé/valeur)
         * utiliser un volume pour le stockage
     * un conteneur avec l'app Python packagée (qui écrit/lit des valeurs dans Redis)
         * le répertoire `templates` doit se trouver à côté de `app.py` 
-        * pour lancer l'application, utilisez `python app.py`
+        * pour lancer l'application, utilisez `python app.py`    * l'app Python doit pouvoir joindre un hôte Redis avec le hostname `db` et `db.b3.ingesup` sur le port 6379
         * DONC vous devrez avoir une structure comme suit : 
 ```
 it4@docky-host:/app$ tree -L 2 /app
@@ -218,10 +219,7 @@ it4@docky-host:/app$ tree -L 2 /app
 └── app.py
 ```
 
-    * l'app Python doit pouvoir joindre un hôte Redis avec le hostname `db` et `db.b3.ingesup` sur le port 6379
-    * un réseau dans lequel toutes vos machines sont
 * ouvrez un navigateur sur votre machine, rdv à http://<IP_VM>:5000
-
 * modifier le fichier yml et ajouter un troisième conteneur reverse proxy NGINX qui redirige vers l'interface web de l'app Python
 
 * **à la fin** :
