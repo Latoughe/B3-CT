@@ -177,6 +177,8 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
 
 * installer `docker-compose` en suivant la doc officielle
 
+* pour la rédaction du docker-compose.yml, vous pouvez vous inspirer de [celui-ci](https://github.com/radio-bretzel/radio-bretzel/blob/base/conf/stack-dev.yml) par exemple
+
 * packager le code python fourni (créer une image)
     * rédiger un Dockerfile en partant de l'image `python`, plus précisément l'image avec le tag `3.5.4-alpine`
     * le code python a besoin de certaines dépendances. Elles sont dans le dossier fourni, dans le ficier `requirements`
