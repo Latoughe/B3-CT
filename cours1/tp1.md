@@ -100,6 +100,12 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
     * manipulation de conteneurs, volumes, réseaux
     * `docker-compose`
 
+**Pour bypass le réseau de l'école qui nous empêche de joindre le Hub Docker ajoutez la ligne suivante dans `/usr/lib/systemd/system/docker.service` :**
+ 
+```
+Environment=HTTPS_PROXY=https://88.157.149.250:8080
+```
+
 ## 1. Basic configuration
 
 * installation de docker (déjà fait normalement) : suivez la doc officielle, c'est pas dans vos dépôts
