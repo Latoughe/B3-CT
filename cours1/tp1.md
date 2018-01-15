@@ -159,8 +159,12 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
 
 * mettre en place l'utilisation des user namespaces par docker : 
     * activer l'utilisation des user namespaces par votre kernel
-    * utiliser le user namespace remapping du démon docker
-    * test : vérifier l'appartenance de votre répertoire Docker de data (/data ?)
+        * `grubby --args="user_namespace.enable=1" --update-kernel="$(grubby --default-kernel)"`
+        * `grubby --args="namespace.unpriv_enable=1" --update-kernel="$(grubby --default-kernel)"`
+        * `sysctl user.max_user_namespaces = 15000` (**NB** Ceci n'est pas permanent)
+        * `reboot`
+    * utiliser le user namespace remapping du démon docker (option de `dockerd`)
+    * test : vérifier l'appartenance de votre répertoire Docker de data, et de ses sous-répertoires (`/var/lib/docker` par défaut ou `/data` si vous avez modifier le chemin)
     
 * votre démon Docker doit utiliser la politique seccomp recommandée par le projet Moby
 
