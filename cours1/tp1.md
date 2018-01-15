@@ -103,8 +103,8 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
 ## 1. Basic configuration
 
 * installation de docker (déjà fait normalement) : suivez la doc officielle, c'est pas dans vos dépôts
-* unités systemd de type service et socket
-    * vous pouvez faire `systemctl status docker.socket` par exemple
+* unités systemd de type service (le socket est créé automatiquement)
+    * vous pouvez faire `systemctl status docker.service` par exemple
     * quand vous lancerez le service, le répertoire `/var/lib/docker` se remplira
     * et création du socket UNIX dédié à Docker (voir l'unité `docker.socket` pour plus d'infos)
     * une fois le service démarré vous pouvez utiliser Docker avec root ou les membres du groupe `docker`. Cherchez à quel endroit exactement est apposé cette restriction (c'est l'endroit qui vous permet de communiquer avec le démon docker).
