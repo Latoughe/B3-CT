@@ -27,7 +27,7 @@ Quelques rappels dans cette optique :
 * `ps -ef` ou `ps aux` permet de lister les processus au sein d'un système
 * le répertoire `/proc` contient énormément d'informations quant à l'état de l'OS et du kernel
 
-1. avec runc
+## 1. avec runc
 
 **Caractéristiques** :
 
@@ -54,7 +54,7 @@ Quelques rappels dans cette optique :
 * générer les metadatas depuis le répertoire `<WORKDIR>` : `runc spec` (un fichier json a pop dans le répertoire courant normalement)
 * `runc run <NAME>` et vous avez votre container qui porte le nom `<NAME>`
 
-2. avec rkt
+## 2. avec rkt
 
 * **Caractéristiques** :
 
