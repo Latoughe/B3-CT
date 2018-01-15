@@ -2,7 +2,7 @@
 
 # TP 1.5 - Remake
 
-But :   
+**But :**  
 
 * appréhender et comprendre la conteneurisation
     * en particulier la conteneurisation avec le kernel GNU/Linux
@@ -69,13 +69,14 @@ Quelques rappels dans cette optique :
     * installer le paquet (`rpm -ivh <PACKAGE>`)
     * `rkt` n'utilise pas de démon pour gérer les conteneurs (contrairement à docker). Rien à démarrer donc !
     * `rkt list` pour voir les conteneurs lancés
+    * essayez de lancer un conteneur en montant un volume de l'hôte (`--volume`)
 
 * la ligne de commande `rkt` est un peu moins intuitive que docker. Ceci est justifié par des cas d'utilisation différents, nous y reviendrons. 
     * référez-vous à la [doc officielle](https://coreos.com/rkt/docs/latest/commands.html) pour plus de détails sur la ligne de commande
     * `rkt run` pour lancer un conteneur
     * Pour lancer une image Docker alpine dans un conteneur rkt : `rkt --insecure-options=image run docker://alpine`
 
-* rkt n'utilise pas de démon donc impossible de mettre un conteneur en fond (il serait à la charge du démon... qui n'existe pas donc !). Ceci est la charge de l'init system. 
+* rkt n'utilise pas de démon donc impossible de mettre un conteneur en fond (il serait à la charge du démon... qui n'existe pas donc !). Ceci sera ici à la charge de l'init system. 
 * systemd est le système d'init par défaut sur notre version de CentOS, on peut l'utiliser pour lancer des processus en utilisant `systemd-run` :
     *  `systemd-run sleep 999` lance un processus `sleep` comme un service systemd. Vous obtenez le nom de l'unité au lancement (vous pouvez `systemctl status` dessus)  
     * `systemd-run rkt --insecure-options=image run docker://alpine --exec /bin/sleep -- 9999` permet de lancer une image Docker qui contient un Alpine Linux, et demander à celui de lancer le processus `sleep`
@@ -95,8 +96,8 @@ Quelques rappels dans cette optique :
 Dans cette partie on s'intéressera à plusieurs aspects de docker :
 * côté système : configuration du démon
 * un peu de sécu
-* côté utilisateur : lancer quelques commande `docker` 
-    * manipulation de conteneurs, volumes, réseau
+* côté utilisateur : lancer quelques commandes `docker` 
+    * manipulation de conteneurs, volumes, réseaux
     * `docker-compose`
 
 ## 1. Basic configuration
@@ -106,7 +107,7 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
     * vous pouvez faire `systemctl status docker.socket` par exemple
     * quand vous lancerez le service, le répertoire `/var/lib/docker` se remplira
     * et création du socket UNIX dédié à Docker (voir l'unité `docker.socket` pour plus d'infos)
-    * une fois le service démarré vous pouvez utiliser Docker avec root ou les membres du groupe `docker`. Cherchez à quel endroit exactement est apposé cette restriction (c'et l'endroit qui vous permet de communiquer avec le démon docker).
+    * une fois le service démarré vous pouvez utiliser Docker avec root ou les membres du groupe `docker`. Cherchez à quel endroit exactement est apposé cette restriction (c'est l'endroit qui vous permet de communiquer avec le démon docker).
     
 * changement la configuration de base du démon docker `dockerd`
     * soit en modifiant le fichier de configuration (format json)
@@ -134,7 +135,7 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
 
 * `docker stats` est cool
 
-* TODO (utui:
+* TODO :
     * utiliser `-v` de `docker run` pour monter le répertoire `/home` de l'hôte dans un conteneur `alpine`
     * utiliser `-v` de `docker run` pour monter la page html d'accueil d'un conteneur `nginx`, et `-p` pour accéder à cette page d'accueil depuis un navigateur ur votre machine hôte 
 
@@ -142,7 +143,7 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
 **Nan sans déc y'a un vrai intérêt. Même plusieurs.** Montrer que :
 * approfondir un peu la notion de socket : c'est juste l'endroit où la donnée s'échange. On peut faire transiter n'importe quoi, par exemple de l'HTTP. Le démon docker attend de l'HTTP à travers un socket UNIX (par défaut)
 * c'est "programmatique" comme approche. On pourrait construire nous-même un binaire ou un client pour faire ce que l'on fait d'habitude avec la commande docker
-cette API, elle est conforme aux standards. Une API similaire est présente, par exemple, sous rkt ou les VIC (d'ailleurs, avec un VIC engine, on utilise le binaire docker quand même pour taper dessus : VIC engine expose la même API que docker)
+cette API, elle est conforme aux standards. Une API similaire est présente, par exemple, sous rkt ou les VIC (d'ailleurs, avec un VIC engine, on utilise le binaire `docker` quand même pour taper dessus : VIC engine expose la même API que docker)
 
 * **Exploration manuelle** de l'API HTTP docker (conforme standards) en utilisant l'option `--unix-socket` de `curl`
     * `curl --unix-socket <PATH_TO_SOCKET> http://<URI>`
@@ -159,43 +160,51 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
     * activer l'utilisation des user namespaces par votre kernel
     * utiliser le user namespace remapping du démon docker
     * test : vérifier l'appartenance de votre répertoire Docker de data (/data ?)
+    
 * votre démon Docker doit utiliser la politique seccomp recommandée par le projet Moby
 
 * suivre la doc officielle pour mettre en place l'utilisation d'une backend device-mapper en direct-lvm ("CONFIGURE DIRECT-LVM MODE MANUALLY") côté stockage
     * test : `docker info`, `df -h` à chaque lancement de conteneur
     * test2 : lancer un conteneur, exécuter un shell dedans, remplir le disque complètement. Plus aucune opération est réalisable. On peut tuer le conteneur depuis l'extérieur
 
-* explorer les options de `docker run` et observer celles qui sont intéressantes côté sécu
+* explorer les options de `docker run` et observer celles qui sont intéressantes côté sécu 
+    * réduction de capabilities avec `--cap-drop` (`pscap` pour bien voir, paquet `libcap-ng-utils`)
+    * réduction de ressources
+    * cgroups
+    * etc
 
 ## 5. Compose
 
 * installer `docker-compose` en suivant la doc officielle
 
 * packager le code python fourni (créer une image)
-    * rédiger un Dockerfile en partant de l'image
+    * rédiger un Dockerfile en partant de l'image `python`, plus précisément l'image avec le tag `3.5.4-alpine`
     * le code python a besoin de certaines dépendances. Elles sont dans le dossier fourni, dans le ficier `requirements`
-    * vous pouvez les installer en utilisant `pip` : 
+    * vous pouvez les installer en utilisant `pip install -r requirements` : 
 
 * créer un `docker-compose.yml` qui contient :
     * un conteneur Redis (stockage clé/valeur)
+        * utiliser un volume pour le stockage
     * un conteneur avec l'app Python packagée (qui écrit/lit des valeurs dans Redis)
     * l'app Python doit pouvoir joindre un hôte Redis avec le hostname `db` et `db.b3.ingesup` sur le port 6379
+    * un réseau dans lequel toutes vos machines sont
 * ouvrez un navigateur sur votre machine, rdv à http://<IP_VM>:5000
 
 * modifier le fichier yml et ajouter un troisième conteneur reverse proxy NGINX qui redirige vers l'interface web de l'app Python
 
 * **à la fin** :
 
-* un conteneur de front front : NGINX, qui écoute sur le port 80, accessible depuis l'extérieur
-* un conteneur applicatif app : l'app Python, packagée par vos soins, joignable que dans le réseau de votre docker-compose
-* un conteneur de bdd Redis db, qui écoute sur le port 6379, dans lequel app vient écrire
-* c'est un compose typique :
+* un conteneur de front **`front`** : NGINX, qui écoute sur le port 80, accessible depuis l'extérieur
+* un conteneur applicatif **`app`** : l'app Python, packagée par vos soins, joignable que dans le réseau de votre docker-compose
+* un conteneur de bdd Redis **`db`**, qui écoute sur le port 6379, dans lequel app vient écrire
+* c'est un compose assez typique :
     * il est autonome : il n'a besoin de rien d'autre pour fonctionner
     * il est scalable : on peut le dupliquer et certaines des unités peuvent elles-aussi être dupliquées facilement à l'intérieur
-    * on pourrait faire un cluster redis plutôt qu'un seul noeud et changer les configurations du serveur applicatif et reverse proxy pour le rendre plus robuste et l'adapter à des besoins spécifiques
+    * on pourrait faire un cluster redis plutôt qu'un seul noeud et changer les configurations du serveur applicatif et reverse proxy pour le rendre plus robuste et l'adapter à des besoins spécifiques. Mais c'est pas notre objectif ici :)
 
 
 ## 6. GUI ?
 
 * Déployer Portainer (ça se trouve sur github !)
 * créer un deuxième hôte Docker (deuxième VM) et le piloter depuis Portainer (socket TCP)
+* un troisième noeud et un docker swarm fonctionnel ? Pilotable depuis Portainer ? :)
