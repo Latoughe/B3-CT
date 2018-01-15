@@ -105,7 +105,7 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
 ```
 Environment=HTTPS_PROXY=https://88.157.149.250:8080
 ```
-
+Si celui-ci ne fonctionne plus ou est trop lent, allez chercher un autre proxy [ici](https://free-proxy-list.net/) (faut un proxy HTTPS, de préférence "elite proxy")
 ## 1. Basic configuration
 
 * installation de docker (déjà fait normalement) : suivez la doc officielle, c'est pas dans vos dépôts
