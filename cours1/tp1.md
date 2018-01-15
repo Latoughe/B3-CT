@@ -205,6 +205,19 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
         * utiliser un volume pour le stockage
     * un conteneur avec l'app Python packagée (qui écrit/lit des valeurs dans Redis)
         * le répertoire `templates` doit se trouver à côté de `app.py` 
+        * pour lancer l'application, utilisez `python app.py`
+        * DONC vous devrez avoir une structure comme suit : 
+```
+it4@docky-host:/app$ tree -L 2 /app
+.
+├── docker-compose.yml
+├── Dockerfile
+├── requirements
+├── templates
+│   └── index.html
+└── app.py
+```
+
     * l'app Python doit pouvoir joindre un hôte Redis avec le hostname `db` et `db.b3.ingesup` sur le port 6379
     * un réseau dans lequel toutes vos machines sont
 * ouvrez un navigateur sur votre machine, rdv à http://<IP_VM>:5000
