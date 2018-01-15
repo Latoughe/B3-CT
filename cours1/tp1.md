@@ -161,6 +161,7 @@ cette API, elle est conforme aux standards. Une API similaire est présente, par
 * quand vous requêterez l'API avec `curl`, vous récupérerez du JSON. C'est assez moche dans un shell. On peut quand même le rendre plus joli avec : 
 ```
 curl --unix-socket <PATH_TO_SOCKET> http://localhost/<URI> | python
+``` 
    
 ## 4. Robust conf
 
@@ -203,6 +204,7 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
     * un conteneur Redis (stockage clé/valeur)
         * utiliser un volume pour le stockage
     * un conteneur avec l'app Python packagée (qui écrit/lit des valeurs dans Redis)
+        * le répertoire `templates` doit se trouver à côté de `app.py` 
     * l'app Python doit pouvoir joindre un hôte Redis avec le hostname `db` et `db.b3.ingesup` sur le port 6379
     * un réseau dans lequel toutes vos machines sont
 * ouvrez un navigateur sur votre machine, rdv à http://<IP_VM>:5000
