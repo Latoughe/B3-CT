@@ -160,8 +160,7 @@ cette API, elle est conforme aux standards. Une API similaire est présente, par
     
 * quand vous requêterez l'API avec `curl`, vous récupérerez du JSON. C'est assez moche dans un shell. On peut quand même le rendre plus joli avec : 
 ```
-curl --unix-socket <PATH_TO_SOCKET> http://localhost/<URI> | python -m json.tool
-```
+curl --unix-socket <PATH_TO_SOCKET> http://localhost/<URI> | python
    
 ## 4. Robust conf
 
@@ -171,8 +170,9 @@ Partie orientée système. L'objectif est de rendre un peu plus robuste un démo
     * activer l'utilisation des user namespaces par votre kernel
         * `grubby --args="user_namespace.enable=1" --update-kernel="$(grubby --default-kernel)"`
         * `grubby --args="namespace.unpriv_enable=1" --update-kernel="$(grubby --default-kernel)"`
-        * `sysctl user.max_user_namespaces = 15000` (**NB** Ceci n'est pas permanent)
         * `reboot`
+        * `sysctl user.max_user_namespaces = 15000` (**NB** Ceci n'est pas permanent)
+
     * utiliser le user namespace remapping du démon docker (option de `dockerd`)
     * test : vérifier l'appartenance de votre répertoire Docker de data, et de ses sous-répertoires (`/var/lib/docker` par défaut ou `/data` si vous avez modifier le chemin)
     
