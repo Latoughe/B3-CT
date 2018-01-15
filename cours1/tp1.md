@@ -146,6 +146,7 @@ Dans cette partie on s'intéressera à plusieurs aspects de docker :
 cette API, elle est conforme aux standards. Une API similaire est présente, par exemple, sous rkt ou les VIC (d'ailleurs, avec un VIC engine, on utilise le binaire `docker` quand même pour taper dessus : VIC engine expose la même API que docker)
 
 * **Exploration manuelle** de l'API HTTP docker (conforme standards) en utilisant l'option `--unix-socket` de `curl`
+    * pour l'`<URI>` aller voir la doc [ici](https://docs.docker.com/engine/api/v1.30/)
     * `curl --unix-socket <PATH_TO_SOCKET> http://<URI>`
     * récupérer la liste des conteneurs actifs
     * récupérer la liste des images
