@@ -160,7 +160,7 @@ cette API, elle est conforme aux standards. Une API similaire est présente, par
     
 * quand vous requêterez l'API avec `curl`, vous récupérerez du JSON. C'est assez moche dans un shell. On peut quand même le rendre plus joli avec : 
 ```
-curl --unix-socket <PATH_TO_SOCKET> http://localhost/<URI> | python
+curl --unix-socket <PATH_TO_SOCKET> http://localhost/<URI> | python -m json.tool
 ``` 
    
 ## 4. Robust conf
