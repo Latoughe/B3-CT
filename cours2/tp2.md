@@ -69,9 +69,9 @@ docker tag alpine <REGISTRY_URL>:<PORT>/<GITLAB_USER>/<GITLAB_REPO>/<IMAGE>:<TAG
 docker tag alpine gitlab.b3.ingesup:9999/root/test-project/alpine:mine
 
 # On se log à notre registre
-docker login <HOSTNAME>
+docker login <HOSTNAME>:<PORT>
 # Par exemple
-docker login gitlab.b3.ingesup
+docker login gitlab.b3.ingesup:9999
 
 # On peut push 
 docker push gitlab.b3.ingesup:9999/root/test-project/alpine:mine 
