@@ -1,9 +1,10 @@
 # B3 - Conteneurisation 
 
-**RAPPELS** : 
-    * désactiver SELinux
-    * laisser **activé** le firewall et le configurer si besoin
-    * inspirez-vous du TP précédent pour certains détails (install + conf Docker)
+**RAPPELS** :    
+
+* désactiver SELinux
+* laisser **activé** le firewall et le configurer si besoin
+* inspirez-vous du TP précédent pour certains détails (install + conf Docker)
 
 ## Part 1 : Gitlab
 Ici, seront déployés, sur une nouvelle VM :  
