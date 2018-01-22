@@ -85,6 +85,7 @@ docker push gitlab.b3.ingesup:9999/root/test-project/alpine:mine
 ```
 
 * (optionnel) Mettre en place un contrôle de syntaxe des fichiers Dockerfile et docker-compose.yml qui sont poussés sur le dépôt
+    * pour ce faire, il faut rédiger un script du langage de votre choix (bash, python, autres) et l'utiliser comme un hook git 
 
 **4. Mettre en place un build automatisé**
 
