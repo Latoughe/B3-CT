@@ -16,8 +16,8 @@ Ici, seront déployés, sur une nouvelle VM :
 Le but va être de monter une pipeline de CI/CD Gitlab. Un morceau de code vous sera fourni, il devra être hébergé par Gitlab, testé lors des commits, puis déployé sur un serveur de "staging". 
 
 **1. Ajout d'un disque**
-    * ajouter un disque à la machine (30Go)
-    * utiliser LVM : ajouter ce disque à un volume group nouvellement créé, et s'en servir pour monter une partition `/data` de 15 Go
+* ajouter un disque à la machine (30Go)
+* utiliser LVM : ajouter ce disque à un volume group nouvellement créé, et s'en servir pour monter une partition `/data` de 15 Go
     * cette partition `/data` stockera... les données de vos application
     
 **2. Installer Docker**
@@ -102,7 +102,7 @@ sleepytest:
 
 ## Part 2 : Docker swarm
 
-* utiliser le package fourni pour construire un `docker-compose.yml`
+* utiliser le package fournie pour construire un `docker-compose.yml`
     * même code que la dernière fois (ou presque)
     * utiliser la commande `docker-compose up` avec l'option `--scale` pour faire pop trois, quatre ou plus de conteneur `app`
     * le loadbalancing est automatiquement effectué par NGINX, expliquer cela
@@ -130,3 +130,7 @@ deploy:
 * lancer un Portainer pour piloter le swarm (en tant que service swarm, pas juste un docker run :) )
 
 * utiliser Weave Cloud pour monitorer votre déploiement Swarm
+
+
+
+## Part 3 : docker storage & networking****
