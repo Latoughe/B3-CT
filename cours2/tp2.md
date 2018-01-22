@@ -57,8 +57,27 @@ sudo EXTERNAL_URL="http://gitlab.example.com" yum install -y gitlab-ce
 * et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>`
 
 * push une image sur l'espace du registre dédié à ce projet
+    * le nom de l'image doit se conformer à une syntaxe précise, par exemple, pour push une image alpine
+```
+# On récupère une image alpine sur le Hub
+docker pull alpine
 
-5. (optionnel) Mettre en place un contrôle de syntaxe des fichiers Dockerfile et docker-compose.yml qui sont poussés sur le dépôt
+# On la retag en suivant la convention de nommage (obligatoire)
+docker tag alpine <REGISTRY_URL>:<PORT>/<GITLAB_USER>/<GITLAB_REPO>/<IMAGE>:<TAG>
+
+# Par exemple
+docker tag alpine gitlab.b3.ingesup:9999/root/test-project/alpine:mine
+
+# On se log à notre registre
+docker login <HOSTNAME>
+# Par exemple
+docker login gitlab.b3.ingesup
+
+# On peut push 
+docker push gitlab.b3.ingesup:9999/root/test-project/alpine:mine 
+```
+
+* (optionnel) Mettre en place un contrôle de syntaxe des fichiers Dockerfile et docker-compose.yml qui sont poussés sur le dépôt
 
 **4. Mettre en place un build automatisé**
 
