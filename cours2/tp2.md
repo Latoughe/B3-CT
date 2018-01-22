@@ -117,10 +117,11 @@ sleepytest:
 * mettre en place le build simpliste mentionné plus haut
 
 * mettre en place le build d'un Dockerfile
-    * utiliser une image avec python3 et ajoutez curl dedans (pour les tests)
+    * l'image utilisé pour le build devra posséder les commandes docker. A des fins de tests, utilisez l'image `docker:latest`
+    * cette image lancera le build d'un Dockerfile avec python3 et le binaire curl dedans (pour les tests)
     * le test devra exécuter la commande `python -m http.server 8000` (la commande lance un serveur web sur le port 8000)
     * tester le bon fonctionnement du serveur web avec `curl`
-    * un `docker login` et un `docker build` devront être réalisés pour pousser l'image sur le registre
+    * si le `docker build` passe,  un `docker login` et un `docker push` devront être réalisés pour pousser l'image sur le registre
 
 ## Part 2 : Docker swarm
 
