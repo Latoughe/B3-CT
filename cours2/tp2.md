@@ -15,14 +15,16 @@ Ici, seront déployés, sur une nouvelle VM :
 
 Le but va être de monter une pipeline de CI/CD Gitlab. Un morceau de code vous sera fourni, il devra être hébergé par Gitlab, testé lors des commits, puis déployé sur un serveur de "staging". 
 
-**1. Ajout d'un disque**
-    * ajouter un disque à la machine (30Go)
-    * utiliser LVM : ajouter ce disque à un volume group nouvellement créé, et s'en servir pour monter une partition `/data` de 15 Go
-    * cette partition `/data` stockera... les données de vos application
+**1. Ajout d'un disque** 
+
+* ajouter un disque à la machine (30Go)
+* utiliser LVM : ajouter ce disque à un volume group nouvellement créé, et s'en servir pour monter une partition `/data` de 15 Go
+* cette partition `/data` stockera... les données de vos application
     
 **2. Installer Docker**
-    * suivre la doc officielle
-    * utiliser comme répertoire de données `/data/docker`
+
+* suivre la doc officielle
+* utiliser comme répertoire de données `/data/docker`
 
 **3. Installer gitlab-ce**
 On va utiliser l'installation "omnibus" de Gitlab. N'hésitez pas à vous référer à la doc officielle. 
