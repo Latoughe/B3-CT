@@ -54,7 +54,7 @@ sudo EXTERNAL_URL="http://gitlab.example.com" yum install -y gitlab-ce
         * `registry_external_url 'https://<HOSTNAME>:<PORT>'`
     * redémarrer gitlab complètement avec `gitlab-ctl reconfigure`
 * vous devriez pouvoir avoir accès au registre dans votre projet (sur l'interface web)
-* et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>
+* et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>`
 
 * push une image sur l'espace du registre dédié à ce projet
 
@@ -160,7 +160,7 @@ Préparez deux machines :
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address <VM_IP>
 ```
-    * après l'init, attendez que les pods soient en état de marche avant de dérouler la documentation (seul les DNS doivent restés éteints)
+* après l'init, attendez que les pods soient en état de marche avant de dérouler la documentation (seul les DNS doivent restés éteints)
    * une fois le cluster mis en place (quand vous faites un `kubectl get pods --all-namespace` tout le monde devrait être OK) déployez le dashboard Kubernetes avec :
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
