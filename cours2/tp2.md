@@ -149,7 +149,9 @@ Préparez deux machines :
 * swap désactivée (`swapoff` et/ou `/etc/fstab`)
 * docker installé
     * le démon utilise le driver cgroup `cgroupfs` (`--exec-opt native.cgroupdriver=cgroupfs` sur la ligne `dockerd`)
-*   * le kubelet aussi (dans le fichier `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf`)
+* les éléments nécessaire à Kubernetes installés, suivre la doc [ici](https://kubernetes.io/docs/setup/independent/install-kubeadm/)
+*   * le kubelet utilise aussi le driver cgroup `cgroupfs` (dans le fichier `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf`)
+    * ces deux configs permettent d'évite des problèmes plus tard. L'idée est surtout de mettre le même driver des deux côtés (`docker` et `kubelet`). `cgroupfs` sera celui qui vous posera le moins de soucis de configuration.
 
 * lisez ce qu'il y a en dessous **d'abord** puis suivre la doc [ici](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/)
     * on va utiliser Calico comme driver réseau. Donc pour l'initialisation du cluster (ça peut prendre un p'tit moment)   avec `kubeadm init` utilisez : 
