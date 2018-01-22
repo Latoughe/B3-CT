@@ -98,7 +98,7 @@ sleepytest:
     * utiliser une image avec python3 et ajoutez curl dedans (pour les tests)
     * le test devra exécuter la commande `python -m http.server 8000` (la commande lance un serveur web sur le port 8000)
     * tester le bon fonctionnement du serveur web avec `curl`
-    * un `docker login` et un `docker build` devront être réalisés pour pousser l'image sur le registre
+    * un `docker login`, un `docker build`, puis un `docker push` devront être réalisés pour pousser l'image sur le registre
 
 ## Part 2 : Docker swarm
 
