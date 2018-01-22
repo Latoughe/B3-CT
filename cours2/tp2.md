@@ -129,8 +129,4 @@ deploy:
 
 * lancer un Portainer pour piloter le swarm (en tant que service swarm, pas juste un docker run :) )
 
-* utiliser Weave Cloud pour monitorer votre déploiement Swarm
-
-
-
-## Part 3 : docker storage & networking****
+* utiliser Weave Cloud pour monitorer votre déploiement Swarm (inscription gratuite en ligne)
