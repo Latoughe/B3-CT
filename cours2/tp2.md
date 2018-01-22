@@ -58,6 +58,7 @@ sudo EXTERNAL_URL="http://<HOSTNAME>" yum install -y gitlab-ce
     * redémarrer gitlab complètement avec `gitlab-ctl reconfigure`
 * vous devriez pouvoir avoir accès au registre dans votre projet (sur l'interface web)
 * et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>`
+    * pour cela, il faudra copier le  certificat dans `/etc/docker/certs.d/<HOST>.b3.ingesup/ca.crt` (créer le répertoire s'il n'existe pas) afin de faire confiance au certificat
 
 * push une image sur l'espace du registre dédié à ce projet
     * le nom de l'image doit se conformer à une syntaxe précise, par exemple, pour push une image alpine
