@@ -53,7 +53,7 @@ sudo EXTERNAL_URL="http://gitlab.example.com" yum install -y gitlab-ce
         * `registry_external_url 'https://<HOSTNAME>:<PORT>'`
     * redémarrer gitlab complètement avec `gitlab-ctl reconfigure`
 * vous devriez pouvoir avoir accès au registre dans votre projet (sur l'interface web)
-* et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>
+* et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>`
 
 * push une image sur l'espace du registre dédié à ce projet
 
