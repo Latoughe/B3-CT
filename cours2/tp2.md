@@ -54,13 +54,13 @@ sudo EXTERNAL_URL="http://<HOSTNAME>" yum install -y gitlab-ce
 
 * on va aussi activer le registre Docker
     * modifier le fichier `/etc/gitlab/gitlab.rb` :
-        * `registry_external_url 'https://<HOSTNAME>:<PORT>'`
+        * `registry_external_url 'https://<FQDN>:<PORT>'`
     * redémarrer gitlab complètement avec `gitlab-ctl reconfigure`
 * vous devriez pouvoir avoir accès au registre dans votre projet (sur l'interface web)
-* et vous devriez pouvoir vous logger avec `docker login <HOSTNAME>:<PORT>`
+* et vous devriez pouvoir vous logger avec `docker login <FQDN>:<PORT>`
     * sauf que votre registe est 'insecure' : le certificat est auto-signé
-    * pour cela, il faudra copier le  certificat dans `/etc/docker/certs.d/<HOST>/ca.crt` (créer le répertoire s'il n'existe pas) afin de faire confiance au certificat
-    * le nom du dossier <HOST> *est important* (doit porter le hostname du registre)
+    * pour cela, il faudra copier le  certificat dans `/etc/docker/certs.d/<FQDN:PORT>/ca.crt` (créer le répertoire s'il n'existe pas) afin de faire confiance au certificat
+    * le nom du dossier <FQDN:PORT> *est important* (doit porter le hostname du registre)
     * le nom du certificat `ca.crt` est lui aussi *obligatoire*
 
 * push une image sur l'espace du registre dédié à ce projet
@@ -86,7 +86,8 @@ docker push gitlab.b3.ingesup:9999/root/test-project/alpine:mine
 
 * (optionnel) Mettre en place un contrôle de syntaxe des fichiers Dockerfile et docker-compose.yml qui sont poussés sur le dépôt
     * pour ce faire, il faut rédiger un script du langage de votre choix (bash, python, autres) et l'utiliser comme un hook git 
-
+    
+    
 **4. Mettre en place un build automatisé**
 
 * installer un runner (il lancera vos tests)
