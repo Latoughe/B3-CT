@@ -44,6 +44,7 @@ sudo EXTERNAL_URL="http://gitlab.example.com" yum install -y gitlab-ce
     * modifier le fichier `/etc/gitlab/gitlab.rb` :
         * `external_url 'https://<HOSTNAME>'`
     * redémarrer gitlab complètement avec `gitlab-ctl reconfigure`
+    * oubliez pas de reconfigurer le firewall !
 * vous devrez pouvoir vous connecter sur `https://<HOSTNAME>`
 
 * créer un projet de test sur l'interface Gitlab, et récupérer le dépôt Git en local
@@ -112,6 +113,7 @@ sleepytest:
     * modifier la configuration du démon pour utiliser 
         * `metrics-addr: 0.0.0.0:9323` afin de récolter des métriques sur le swarm plus tard (expérimental encore)
         * `experimental: true` à true
+    * faites attention à votre firewall (voir [ici](https://docs.docker.com/engine/swarm/swarm-tutorial/#the-ip-address-of-the-manager-machine) pour plus de renseignements sur les ports à ouvrir)
 
 * déployer un registre Docker, utilisable depuis vos 3 noeuds, et du TLS (certificats auto-signés)
     * depuis les clients, il faudra copier le  certificat dans `/etc/docker/certs.d/<HOST>.b3.ingesup/ca.crt` (créer le répertoire s'il n'existe pas) afin de faire confiance au certificat
