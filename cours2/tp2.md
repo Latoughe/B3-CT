@@ -188,4 +188,4 @@ kubectl proxy --address <VM_IP> --accept-hosts='.*'
 ```
 * go sur `http://<VM_IP>:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/`
 * essayez de déployer un service de test (en plus du dashboard)
-* on peut monter une stack avec un Heapster(+InfluxDB +Grafana) pour avoir des métriques dans le dashboard Kubernetes :) 
+* on peut monter une stack avec un Heapster(+InfluxDB +Grafana) pour avoir des métriques dans le dashboard Kubernetes, ou aussi un Weave, ou du Prometheus !
