@@ -34,7 +34,7 @@ sudo yum install postfix
 sudo systemctl enable postfix
 sudo systemctl start postfix
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
-sudo EXTERNAL_URL="http://gitlab.example.com" yum install -y gitlab-ce
+sudo EXTERNAL_URL="http://<HOSTNAME>" yum install -y gitlab-ce
 ```
 
 * une fois terminé, il vous faudra activer le TLS
